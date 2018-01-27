@@ -1,0 +1,18 @@
+{% extends 'base_struct.html' %}
+{% block content %}
+	<p class="text-center content-name">
+		Выберите ваших партнёров
+	</p>
+	{% for store_list in store_list %}
+	<div id="{{ store_list.id }}" class="selector-partners-elem {% if store_list.id in client_store_list %} selector-partners-elem-on {% endif %} col-lg-2 col-md-3 col-sm-4 col-xs-6">
+		<p class="text-center">{{ store_list.name }}</p>
+	</div>
+	{% endfor %}
+	<form id = "selector-partners-form" action="/" method = "post" type = "display:none;">
+		{% csrf_token %}
+		<input type="hidden" id="storesid" name="storesid">
+	</form>
+	<div id="selector-partners-save" class="selector-partners-save col-lg-2 col-md-3 col-sm-4 col-xs-6">
+		<p class="text-center">Сохранить</p>
+	</div>
+{% endblock content %}

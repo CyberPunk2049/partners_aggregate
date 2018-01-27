@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>
+			{% block title %}
+				Определить для каждой страницы
+			{% endblock %}
+		</title>
+	</head>
+	<body>
+		<div style='width:50%;height:100%;position:absolute;left:25%;min-width:900px'>
+			<header style='position:relative;width:100%;height:150px;box-shadow: 5px 5px 20px rgba(122,122,122,0.5); border-radius:0;background: linear-gradient(to top, #22B14C, #96E444);'>
+				<div style='position:relative;width:30%;height:70%;box-shadow: inset 5px 5px 20px rgba(122,122,122,0.5);left:5%; top:15%;background-color:#FFFFFF;border-radius:0'>
+					<img src="{{ STATIC_URL }}logo.png" alt="Текст" style="position:relative;width:90%;height:90%;left:5%; top:5%;"/>
+				</div>
+				{% block head %}
+				{% endblock %}
+			</header>
+			<article>
+				{% block page %}
+				{% endblock %}
+			</article>
+			<footer style='position:absolute;bottom:0;width:100%;height:100px;box-shadow: 5px 5px 20px rgba(122,122,122,0.5);border-radius:0;background: linear-gradient(to top, #96E444, #22B14C);'>
+				{% block footer %}
+				{% endblock %}
+			</footer>
+		</div>
+	<body>
+<html>
