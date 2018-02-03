@@ -27,7 +27,7 @@ class Stocks(models.Model):
     class Meta:
         verbose_name = u'Скидка партнёра'
         verbose_name_plural = u'Скидки партнёров'
-        db_table= 'general_banks_stores_stocks'
+        db_table= 'stocks_banks_stores'
 
 
 class PaymentsStocks(models.Model):
@@ -56,6 +56,6 @@ class PaymentsStocks(models.Model):
     class Meta:
         verbose_name = u'Скидка платёжной системы'
         verbose_name_plural = u'Скидки платёжных систем'
-        db_table= 'general_payments_stores_stocks'
+        db_table= 'stocks_payments_stores'
 
 # Create your models here.
