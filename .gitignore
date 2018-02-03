@@ -1,4 +1,4 @@
-static/
+/static/
 .idea/
 *.pyc
 partners_aggregate/settings.py

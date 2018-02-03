@@ -1,0 +1,162 @@
+/*base_struct.html*/
+body {
+	background:	#FFFFFF;
+}
+.base-header {
+	background-color: #FFFFFF;
+	height: 150px;
+}
+.base-menu {
+	background-color: #2F4F4F;
+	height: 70px;
+}
+
+.base-footer {
+	background-color: #2F4F4F;
+	height: 100px;
+	overflow:hidden;
+}
+
+.base-wrapper {
+	min-height:100vh;
+	margin-bottom:-100px;
+}
+
+.top-logo-box {
+	height: 150px;
+	width:500px;
+}
+
+.bot-logo-box {
+	background-color:white;
+	height: 70px;
+	margin:15px;
+	width:175px;
+	box-shadow: inset 5px 5px 20px rgba(122,122,122,0.5);
+}
+
+.logo-img {
+	position:relative;
+	width:60%;
+	height:60%;
+	left:10%;
+	top:30%;
+}
+
+.crutch-1 {
+	height:100px;
+}
+/*partners_selector.html*/
+.left-box {
+	
+}
+
+.right-box {
+	
+}
+
+.content-name {
+	font-size:xx-large;
+}
+
+.banklist-head {
+	height:40px;
+	margin:10px;
+	border:1px solid grey;
+	background-color:#dcdcdc;
+}
+
+.banklist-head-col1 {
+	position:relative;
+	width:40%;
+	float:left;
+}
+
+.banklist-head-col2 {
+	position:relative;
+	width:30%;
+	float:left;
+}
+
+.banklist-head-col3 {
+	position:relative;
+	width:30%;
+	float:left;
+}
+
+.banklist-elem {
+	height:60px;
+	margin:10px;
+	cursor:pointer;
+	border:1px solid grey;
+}
+
+.banklist-on-elem {
+	background: linear-gradient(to top, #22B14C, #96E444);
+}
+
+.banklist-elem-col1 {
+	position:relative;
+	width:40%;
+	float:left;
+	
+}
+
+.banklist-elem-col2{
+	position:relative;
+	width:30%;
+	float:left;
+	
+}
+
+.banklist-elem-col3 {
+	position:relative;
+	width:30%;
+	float:left;
+}
+
+.partners-head {
+	height:40px;
+	margin:10px;
+	border:1px solid grey;
+	background-color:#dcdcdc;
+}
+
+.partners-elem {
+	height:100px;
+	margin:10px;
+	cursor:pointer;
+	border:1px solid grey;
+}
+
+.partners-on-elem {
+	background: linear-gradient(to top, #22B14C, #96E444);
+}
+
+.partners-change {
+	height:60px;
+	margin:10px;
+	cursor:pointer;
+	background:#66CAF0;
+	border:1px solid grey;
+}
+
+/*partners_selector.html*/
+
+.selector-partners-elem {
+	height:60px;
+	cursor:pointer;
+	border:1px solid grey;
+}
+
+.selector-partners-elem-on {
+	background:#22B14C;
+}
+
+.selector-partners-save {
+	height:60px;
+	margin:10px;
+	cursor:pointer;
+	background:#66CAF0;
+	border:1px solid grey;
+}

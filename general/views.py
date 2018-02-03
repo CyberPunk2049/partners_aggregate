@@ -1,11 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
-from django.template import loader,RequestContext
-from general.models import Banks,Stocks,Stores
+from django.http import JsonResponse
+from general.models import Banks,Stores
 from django.db.models import Count,Avg
-import json
 
-import pdb
 
 def partners_calculate(request):
 
@@ -48,7 +45,6 @@ def partners_calculate(request):
 	
 		client_store_list=Stores.objects.filter(id__in=stores_id)
 		bank_list=Banks.objects.filter(partners__in=client_store_list).annotate(num_partners=Count('partners'),avg_stocks=Avg('stocks__stock_value'))
-		#store_list=Stores.objects.filter(name__in=test_stores)
 		context={
 			'bank_list':bank_list,
 			'store_list':client_store_list
