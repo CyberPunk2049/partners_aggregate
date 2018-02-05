@@ -16,19 +16,26 @@
 		<div class="container-fluid base-wrapper">
 			<header class="row base-header">
 				<div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-					<div class="top-logo-box">
+					<div class="base-top-logo-box">
 						<img src="{{ STATIC_URL }}logo.png" class="logo-img"/>
 					</div>
 				</div>
-				<!--<div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
-					<h1 align="center"><strong>Агрегатор партнёров банков</strong></h1>
-				</div>-->
 			</header>
 			<div class="row base-menu">
+                <div class="base-menu-items-box">
+                    <div class="base-menu-item {% if view_name == 'banks' %}base-menu-item-on{% endif %}"><a href="{% url 'banks' %}">Банки</a></div>
+                    <div class="base-menu-item {% if view_name == 'partners' %}base-menu-item-on{% endif %}"><a href="{% url 'partners' %}">Партнёры</a></div>
+                    <div class="base-menu-item {% if view_name == 'personal_choice' %}base-menu-item-on{% endif %}"><a href="{% url 'personal_choice' %}">Мой выбор</a></div>
+                    <form action="/banks/" method="post" class="base-search" >
+                        {% csrf_token %}
+                        <input type="search" name="" placeholder="поиск" class="input" />
+                        <input type="submit" name="" value="" class="submit" />
+                    </form>
+                </div>
 			</div>
 			{% block content %}
 			{% endblock %}
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 crutch-1">
+			<div width="100px"">
 			</div>
 		</div>
 		<footer class="container-fluid base-footer">

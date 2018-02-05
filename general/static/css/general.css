@@ -11,6 +11,114 @@ body {
 	height: 70px;
 }
 
+.base-menu-items-box {
+	height: 100%;
+}
+.base-menu-item {
+	float:left;
+	width: 200px;
+	height: 100%;
+    border-right: 1px solid #203535;
+}
+
+.base-menu-item a {
+	display: block;
+    height: 100%;
+	padding-top: 15px;
+	font-size: 190%;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+    text-decoration: none;
+}
+
+.base-menu-item a:hover {
+	color: #82DBDB;
+}
+
+.base-menu-item-on {
+	background-color: #5D9B9B;
+    /*border-bottom: 15px solid white;*/
+}
+/*------------------------------------------------------------------------------------------------------------------*/
+.base-search {
+
+  width: 200px;
+  margin-top:20px;
+  margin-right:40px;
+  position: relative;
+  float:right;
+}
+
+.base-search input {
+  /* отключаем бордюры у инпутов */
+  border: none;
+}
+
+/* стили для поля ввода */
+.base-search .input {
+  /* растягиваем поле ввода на всю ширину формы */
+  width: 100%;
+
+  /* за счет верхнего (8px) и нижнего (9px) внутренних отступов
+  ** регулируем высоту формы
+  ** внутренний отступ справа (37px) делаем больше левого,
+  ** т.к. там будет размещена кнопка отправки	*/
+  padding: 8px 37px 9px 15px;
+
+  /* чтобы ширина поля ввода (100%) включала в себя внутренние отступы */
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  /* добавляем внутренние тени */
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1), inset 0 1px 2px rgba(0,0,0,0.3);
+
+  /* закругляем углы */
+  border-radius: 10px;
+
+  background: #EEE;
+  font: 13px Tahoma, Arial, sans-serif;
+  color: #555;
+  outline: none;
+}
+
+/* меняем оформление поля ввода при фокусе */
+.base-search .input:focus {
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
+  background: #E8E8E8;
+  color: #333;
+}
+
+/* оформляем кнопку отправки */
+.base-search .submit {
+  /* позиционируем кнопку абсолютно от правого края формы */
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 37px;
+
+  /* растягиваем кнопку на всю высоту формы */
+  height: 100%;
+
+  cursor: pointer;
+  background: url(https://lh4.googleusercontent.com/-b-5aBxcxarY/UAfFW9lVyjI/AAAAAAAABUg/gQtEXuPuIds/s13/go.png) 50% no-repeat;
+
+  /* добавляем прозрачность кнопке отправки */
+  opacity: 0.5;
+}
+
+/* при наведении курсора меняем прозрачность кнопки отправки */
+.base-search .submit:hover {
+  opacity: 0.8;
+}
+
+/* данное свойство необходимо для того, чтобы в браузерах
+** Chrome и Safari можно было стилизовать инпуты */
+input[type="search"] {
+  -webkit-appearance: none;
+}
+/*------------------------------------------------------------------------------------------------------------------*/
 .base-footer {
 	background-color: #2F4F4F;
 	height: 100px;
@@ -22,7 +130,7 @@ body {
 	margin-bottom:-100px;
 }
 
-.top-logo-box {
+.base-top-logo-box {
 	height: 150px;
 	width:500px;
 }

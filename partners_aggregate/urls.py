@@ -18,7 +18,10 @@ from django.contrib import admin
 from general import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+	url(r'^admin/', admin.site.urls),
 	url(r'^partners_selector/', views.partners_selector),
+	url(r'^banks/', views.banks, name='banks'),
+	url(r'^partners/', views.partners, name='partners'),
+	url(r'^personal_choice/', views.personal_choice, name='personal_choice'),
 	url(r'^', views.partners_calculate)
 ]
