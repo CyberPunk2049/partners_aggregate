@@ -1,7 +1,7 @@
 from django.db import models
 from general.models import Banks,Stores,Payments
 
-class Stocks(models.Model):
+class Banks_Stores(models.Model):
     id_bank = models.ForeignKey(
         Banks,
         on_delete=models.CASCADE,
@@ -25,12 +25,12 @@ class Stocks(models.Model):
         return self.id_store
 
     class Meta:
-        verbose_name = u'Скидка партнёра'
+        verbose_name = u'Скидку партнёра'
         verbose_name_plural = u'Скидки партнёров'
-        db_table= 'stocks_banks_stores'
+        db_table='discounts_banks_stores'
 
 
-class PaymentsStocks(models.Model):
+class Payments_Stores(models.Model):
     id_payment = models.ForeignKey(
         Payments,
         on_delete=models.CASCADE,
@@ -54,8 +54,7 @@ class PaymentsStocks(models.Model):
         return self.id_store
 
     class Meta:
-        verbose_name = u'Скидка платёжной системы'
+        verbose_name = u'Скидку платёжной системы'
         verbose_name_plural = u'Скидки платёжных систем'
-        db_table= 'stocks_payments_stores'
-
+        db_table = 'discounts_payments_stores'
 # Create your models here.

@@ -43,13 +43,13 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='stocks',
+            model_name='discounts',
             name='id_store',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='general.Stores'),
         ),
         migrations.AddField(
             model_name='banks',
             name='partners',
-            field=models.ManyToManyField(through='general.Stocks', to='general.Stores'),
+            field=models.ManyToManyField(through='discounts.models.Banks_Stores', to='general.Stores'),
         ),
     ]

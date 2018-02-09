@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             options={'verbose_name': 'Банк', 'verbose_name_plural': 'Банки'},
         ),
         migrations.AlterModelOptions(
-            name='stocks',
+            name='discounts',
             options={'verbose_name': 'Скидка', 'verbose_name_plural': 'Скидки'},
         ),
         migrations.AlterModelOptions(

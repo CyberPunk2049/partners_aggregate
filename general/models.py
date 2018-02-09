@@ -79,7 +79,7 @@ class Banks(models.Model):
     )
     partners = models.ManyToManyField(
         Stores,
-        through='stocks.Stocks',
+        through='discounts.Banks_Stores',
         related_name='banks'
     )
 
@@ -122,7 +122,7 @@ class Payments(models.Model):
     )
     partners = models.ManyToManyField(
         Stores,
-        through='stocks.PaymentsStocks',
+        through='discounts.Payments_Stores',
         related_name='payments'
     )
 

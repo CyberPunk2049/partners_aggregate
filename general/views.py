@@ -5,19 +5,22 @@ from django.db.models import Count, Avg
 
 
 def banks(request):
-	context={}
-	context['view_name']='banks'
-	return render(request,'banks.html',context)
+	context = {}
+	context['view_name'] = 'banks'
+	return render(request, 'banks.html', context)
+
 
 def partners(request):
 	context = {}
 	context['view_name'] = 'partners'
-	return render(request, 'partners.html',context)
+	return render(request, 'partners.html', context)
+
 
 def personal_choice(request):
 	context = {}
 	context['view_name'] = 'personal_choice'
-	return render(request, 'personal_choice.html',context)
+	return render(request, 'personal_choice.html', context)
+
 
 def partners_calculate(request):
 	debug_mode = False
@@ -59,8 +62,7 @@ def partners_calculate(request):
 				stores_id = []
 
 		client_store_list = Stores.objects.filter(id__in=stores_id)
-		bank_list = Banks.objects.filter(partners__in=client_store_list).annotate(num_partners=Count('partners'),
-																				  avg_stocks=Avg('stocks__stock_value'))
+		bank_list = Banks.objects.filter(partners__in=client_store_list).annotate(num_partners=Count('partners'),avg_stocks=Count('partners'))
 		context = {
 			'bank_list': bank_list,
 			'store_list': client_store_list

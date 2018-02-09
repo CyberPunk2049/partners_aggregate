@@ -28,8 +28,8 @@
                     <div class="base-menu-item {% if view_name == 'personal_choice' %}base-menu-item-on{% endif %}"><a href="{% url 'personal_choice' %}">Мой выбор</a></div>
                     <form action="/banks/" method="post" class="base-search" >
                         {% csrf_token %}
-                        <input type="search" name="" placeholder="поиск" class="input" />
-                        <input type="submit" name="" value="" class="submit" />
+                        <input type="search" name="" placeholder="Поиск" class="search-input" />
+                        <input type="submit" name="" value="" class="search-submit" />
                     </form>
                 </div>
 			</div>
