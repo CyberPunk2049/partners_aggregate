@@ -26,9 +26,18 @@
                     <div class="base-menu-item {% if view_name == 'banks' %}base-menu-item-on{% endif %}"><a href="{% url 'banks' %}">Банки</a></div>
                     <div class="base-menu-item {% if view_name == 'partners' %}base-menu-item-on{% endif %}"><a href="{% url 'partners' %}">Партнёры</a></div>
                     <div class="base-menu-item {% if view_name == 'personal_choice' %}base-menu-item-on{% endif %}"><a href="{% url 'personal_choice' %}">Мой выбор</a></div>
+
                     <form action="/banks/" method="post" class="base-search" >
+                        <!--<input type="search" name="value" placeholder="Поиск" class="search-input" />
+                        <select class="payments-select">
+	                        <option>Visa</option>
+                            <option>MasterCard</option>
+	                        <option>Мир</option>
+                        </select>-->
+                        {{ form.search_field }}
+                        {{ form.choice_payment }}
+                        {{ form.choice_category }}
                         {% csrf_token %}
-                        <input type="search" name="" placeholder="Поиск" class="search-input" />
                         <input type="submit" name="" value="" class="search-submit" />
                     </form>
                 </div>
