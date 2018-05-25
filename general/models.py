@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 
 class Stores_Categories(models.Model):
     name = models.CharField(
@@ -26,7 +27,10 @@ class Stores(models.Model):
     url = models.URLField(
         max_length=300,
         blank=True,
-        verbose_name='Сайт'
+        verbose_name='Сайт',
+        validators=[
+            URLValidator,
+                    ],
     )
     url_logo = models.URLField(
         max_length=300,
@@ -45,6 +49,17 @@ class Stores(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+
+        #if self.url.count('/') < 3 and self.url!='':
+        #    raise ValidationError('/ - need at the end of URL')
+        #print(self.url)
+
+        #Проверка соотетствия домена между вторым и третьим слэшем
+        a=[i.split('/')[2] for i in Stores.objects.values_list('url', flat=True) if i!='']
+        if (self.url.split('/')[2] in a) and self.url!='':
+            raise ValidationError('same URL')
 
     class Meta:
         verbose_name = u'Партнёр'
@@ -136,4 +151,3 @@ class Payments(models.Model):
         verbose_name = u'Платёжная система'
         verbose_name_plural = u'Платёжные системы'
         ordering = ['name']
-
