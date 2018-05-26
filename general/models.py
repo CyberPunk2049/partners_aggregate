@@ -58,12 +58,15 @@ class Stores(models.Model):
 
         #Проверка соотетствия домена между вторым и третьим слэшем
         a=[i.split('/')[2] for i in Stores.objects.values_list('url', flat=True) if i!='']
-        if (self.url.split('/')[2] in a) and self.url!='':
-            raise ValidationError('same URL')
+        print('Url a'+str(self.url)+'a')
+        if self.url!='':
+            if (self.url.split('/')[2] in a) and (self.name not in Stores.objects.values_list('name', flat=True)):
+                raise ValidationError('The URL already exists in database')
 
     class Meta:
         verbose_name = u'Партнёр'
         verbose_name_plural = u'Партнёры'
+        ordering = ('name',)
 
 
 class Banks(models.Model):
