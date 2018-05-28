@@ -52,17 +52,22 @@ class Stores(models.Model):
 
     def clean(self):
 
-        #if self.url.count('/') < 3 and self.url!='':
-        #    raise ValidationError('/ - need at the end of URL')
-        #print(self.url)
-
-        #Проверка соотетствия домена между вторым и третьим слэшем
-        a=[i.split('/')[2] for i in Stores.objects.values_list('url', flat=True) if i!='']
-        print('Url a'+str(self.url)+'a')
-        if self.url!='':
-            if (self.url.split('/')[2] in a) and (self.name not in Stores.objects.values_list('name', flat=True)):
-                raise ValidationError('The URL already exists in database')
-
+        # При сохранении нового партнёра проверяет, есть ли партнёры с таким URL в базе данных.
+        # Вызывает исключение со списком имён партнёров, у которых совпадает URL.
+        if self.id==None:
+            if self.url !='':
+                url=self.url.split('/')[2]
+                db_stores_all=Stores.objects.values_list('name','url')
+                db_stores_url=[(k,i.split('/')[2]) for (k,i) in db_stores_all if i!='']
+                urls_names=[i for (k,i) in db_stores_url]
+                if url in urls_names:
+                    overlap_names=[k for (k,i) in db_stores_url if i==url]
+                    raise ValidationError('Партнёры: '+','.join(overlap_names)+' - имеют схожий URL')
+        #else:
+        #    urls_names = [i.split('/')[2] for
+        #                  i in Stores.objects.exclude(id=self.id).values_list('url', flat=True) if i != '']
+        #    if self.url!='' and self.url.split('/')[2] in urls_names :
+        #        raise ValidationError('The URL already exists in database')
     class Meta:
         verbose_name = u'Партнёр'
         verbose_name_plural = u'Партнёры'
