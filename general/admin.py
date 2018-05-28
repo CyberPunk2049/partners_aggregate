@@ -16,7 +16,7 @@ class PaymentsAdmin(admin.ModelAdmin):
 
 class StoresAdmin(admin.ModelAdmin):
 	list_display=('name','categories','url')
-	search_fields = ['name']
+	search_fields = ['name','url']
 	list_editable=('categories',)
 
 class Stores_CategoriesAdmin(admin.ModelAdmin):

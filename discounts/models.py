@@ -18,11 +18,8 @@ class Banks_Stores(models.Model):
         verbose_name='Скидка до,%'
     )
 
-    def BankName(self):
-        return self.id_bank
-
-    def StoreName(self):
-        return self.id_store
+    def __str__(self):
+        return self.id_bank.name + ' : ' + self.id_store.name
 
     class Meta:
         verbose_name = u'Скидку партнёра'
@@ -47,11 +44,8 @@ class Payments_Stores(models.Model):
         verbose_name='Скидка до,%'
     )
 
-    def PaymentName(self):
-        return self.id_payment
-
-    def StoreName(self):
-        return self.id_store
+    def __str__(self):
+        return self.id_payment.name + ' : ' + self.id_store.name
 
     class Meta:
         verbose_name = u'Скидку платёжной системы'
