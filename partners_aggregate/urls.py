@@ -20,10 +20,9 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
-	#url(r'^partners_selector/', views.partners_selector),
 	url(r'^banks/', views.banks, name='banks'),
 	url(r'^partners/', views.partners, name='partners'),
 	url(r'^personal_choice/', views.personal_choice, name='personal_choice'),
+	url(r'^discount_views/', views.DiscountsListView.as_view(), name='discount_view'),
 	url(r'^$', RedirectView.as_view(pattern_name='banks', permanent=False)),
-	#url(r'^', views.partners_calculate)
 ]

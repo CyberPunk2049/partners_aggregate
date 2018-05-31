@@ -25,6 +25,7 @@ class Banks_Stores(models.Model):
         verbose_name = u'Скидку партнёра'
         verbose_name_plural = u'Скидки партнёров'
         db_table='discounts_banks_stores'
+        unique_together = (('id_bank', 'id_store'),)
 
 
 class Payments_Stores(models.Model):
@@ -51,4 +52,4 @@ class Payments_Stores(models.Model):
         verbose_name = u'Скидку платёжной системы'
         verbose_name_plural = u'Скидки платёжных систем'
         db_table = 'discounts_payments_stores'
-# Create your models here.
+        unique_together = (('id_payment', 'id_store'),)
