@@ -5,6 +5,31 @@
     <title>Title</title>
 </head>
 <body>
-{{ discount_list }}
+
+    <form action="http://127.0.0.1:8000/discount_views/" method="get">
+         &nbsp;&nbsp;&nbsp;&nbsp;{{ form.search_field }}
+        <input type="submit">
+    </form>
+    <br>
+    {% if discount_dict%}
+        {% if discounts_no_found %}
+            Совпадений не найдено, попробуйте другое название
+        {% else %}
+            {% for key, value in discount_dict.items %}
+                {% if value %}
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{ key }}:
+                    <br>
+                    <br>
+                    {% for name,partner,discount in value %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ partner }}&nbsp;:&nbsp;{{ name }}&nbsp;:&nbsp;скидка до&nbsp;{{ discount}}%<br>
+                    {% endfor %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        Введите название магазина
+    {% endif %}
+
 </body>
 </html>

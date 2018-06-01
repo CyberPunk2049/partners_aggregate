@@ -15,14 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from general import views
+from general.views import banks,partners,personal_choice
+from discounts.views import DiscountsListView
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
-	url(r'^banks/', views.banks, name='banks'),
-	url(r'^partners/', views.partners, name='partners'),
-	url(r'^personal_choice/', views.personal_choice, name='personal_choice'),
-	url(r'^discount_views/', views.DiscountsListView.as_view(), name='discount_view'),
+	url(r'^banks/', banks, name='banks'),
+	url(r'^partners/', partners, name='partners'),
+	url(r'^personal_choice/', personal_choice, name='personal_choice'),
+	url(r'^discount_views/', DiscountsListView.as_view(), name='discount_view'),
 	url(r'^$', RedirectView.as_view(pattern_name='banks', permanent=False)),
 ]

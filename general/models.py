@@ -63,11 +63,11 @@ class Stores(models.Model):
                 if url in urls_names:
                     overlap_names=[k for (k,i) in db_stores_url if i==url]
                     raise ValidationError('Партнёры: '+','.join(overlap_names)+' - имеют схожий URL')
-        #else:
-        #    urls_names = [i.split('/')[2] for
-        #                  i in Stores.objects.exclude(id=self.id).values_list('url', flat=True) if i != '']
-        #    if self.url!='' and self.url.split('/')[2] in urls_names :
-        #        raise ValidationError('The URL already exists in database')
+        else:
+            urls_names = [i.split('/')[2] for
+                          i in Stores.objects.exclude(id=self.id).values_list('url', flat=True) if i != '']
+            if self.url!='' and self.url.split('/')[2] in urls_names :
+                raise ValidationError('The URL already exists in database')
     class Meta:
         verbose_name = u'Партнёр'
         verbose_name_plural = u'Партнёры'
