@@ -23,15 +23,14 @@
 			</header>
 			<div class="row base-menu">
                 <div class="base-menu-items-box">
-                    <div class="base-menu-item {% if view_name == 'banks' %}base-menu-item-on{% endif %}"><a href="{% url 'banks' %}">Банки</a></div>
-                    <div class="base-menu-item {% if view_name == 'partners' %}base-menu-item-on{% endif %}"><a href="{% url 'partners' %}">Партнёры</a></div>
-                    <div class="base-menu-item {% if view_name == 'personal_choice' %}base-menu-item-on{% endif %}"><a href="{% url 'personal_choice' %}">Мой выбор</a></div>
+                    <div class="base-menu-item {% if view_name == 'BanksList' %}base-menu-item-on{% endif %}"><a href="{% url 'banks' %}">Банки</a></div>
+                    <div class="base-menu-item {% if view_name == 'StoreList' %}base-menu-item-on{% endif %}"><a href="{% url 'stores' %}">Партнёры</a></div>
+                    <div class="base-menu-item {% if view_name == 'DiscountsList' %}base-menu-item-on{% endif %}"><a href="{% url 'discounts' %}">Скидки</a></div>
 
-                    <form action="/banks/" method="post" class="base-search" >
-                        {{ form.search_field }}
-                        {{ form.choice_payment }}
-                        {{ form.choice_category }}
-                        {% csrf_token %}
+                    <form action="{{ request.name }}" method="get" class="base-search" >
+                        {% for field in form %}
+							{{ field }}
+						{% endfor %}
                         <input type="submit" name="" value="" class="search-submit" />
                     </form>
                 </div>

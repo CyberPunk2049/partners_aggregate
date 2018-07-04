@@ -1,0 +1,6 @@
+{% extends 'base_struct.html' %}
+{% block content %}
+    {% for partner in object_list %}
+            <li>{{ partner.name }}</li>
+    {% endfor %}
+{% endblock %}

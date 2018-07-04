@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-    <form action="http://81.176.228.46/discount_views/" method="get">
-         &nbsp;&nbsp;&nbsp;&nbsp;{{ form.search_field }}
-        <input type="submit">
-    </form>
-    <br>
+{% extends 'base_struct.html' %}
+{% block content %}
     {% if discount_dict%}
         {% if discounts_no_found %}
             Совпадений не найдено, попробуйте другое название
@@ -30,6 +19,4 @@
     {% else %}
         Введите название магазина
     {% endif %}
-
-</body>
-</html>
+{% endblock %}

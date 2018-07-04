@@ -1,25 +1,28 @@
 from django.views.generic import TemplateView
+from django import forms
+
 from discounts.models import Banks_Stores, Payments_Stores
 from discounts.forms import DiscountSearchForm
 
-class DiscountsListView(TemplateView):
+from general.forms import SearchForm
 
-    template_name = 'discounts/banks_stores_list.html'
+class DiscountsList(TemplateView):
+    '''Класс для отображения найденных скидок'''
+    template_name = 'discounts/discounts_list.html'
+    view_name = 'DiscountsList'
 
     def dispatch(self, request, *args, **kwargs):
-
-        self.form = DiscountSearchForm(request.GET)
+        self.form = SearchForm(request.GET)
+        self.form.fields['choice_letter'].widget = forms.HiddenInput()
+        self.form.fields['choice_category'].widget = forms.HiddenInput()
         self.form.is_valid()
-
-        return super(DiscountsListView, self).dispatch(request,*args,**kwargs)
+        return super(DiscountsList, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-
-        return super(DiscountsListView, self).get(request, *args, **kwargs)
+        return super(DiscountsList, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-
-        context = super(DiscountsListView, self).get_context_data(**kwargs)
+        context = super(DiscountsList, self).get_context_data(**kwargs)
         context['form'] = self.form
 
         if self.form.cleaned_data['search_field']:
@@ -28,11 +31,10 @@ class DiscountsListView(TemplateView):
                 context['discounts_no_found'] = False
             else:
                 context['discounts_no_found'] = True
-
+        context['view_name']=self.view_name
         return context
 
     def get_dict_of_discount_lists(self, filter_name):
-
         type_names = {
             'Banks_Stores':'Банковские скидки',
             'Payments_Stores':'Скидки платёжных систем'
@@ -43,8 +45,6 @@ class DiscountsListView(TemplateView):
             discount_dict[value]=self.get_discount_list(key,filter_name)
 
         return discount_dict
-
-
 
     def get_discount_list(self, type_name, filter_name):
 

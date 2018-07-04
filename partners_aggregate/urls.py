@@ -14,16 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
-from general.views import banks,partners,personal_choice
-from discounts.views import DiscountsListView
 from django.views.generic.base import RedirectView
+from django.contrib import admin
+
+from general.views import personal_choice, BanksList, StoresList
+
+from discounts.views import DiscountsList
+
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
-	url(r'^banks/', banks, name='banks'),
-	url(r'^partners/', partners, name='partners'),
-	url(r'^personal_choice/', personal_choice, name='personal_choice'),
-	url(r'^discount_views/', DiscountsListView.as_view(), name='discount_view'),
+	url(r'^banks/', BanksList.as_view(), name='banks'),
+	url(r'^stores/', StoresList.as_view(), name='stores'),
+	url(r'^discounts/', DiscountsList.as_view(), name='discounts'),
 	url(r'^$', RedirectView.as_view(pattern_name='banks', permanent=False)),
 ]
