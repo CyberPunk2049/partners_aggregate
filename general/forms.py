@@ -8,9 +8,10 @@ class SearchForm(forms.Form):
     blank_category = (('', '---Категория---'),)
     blank_letter = (('', '---Буква---'),)
 
-    search_field = forms.CharField(widget=forms.TextInput(attrs={'class': 'search-input'}),required=False)
     # TODO: Поменять payment на letter
-    choice_letter = forms.ChoiceField(widget=forms.Select(attrs={'class': 'payments-select'}),
-                                      choices=blank_letter + letter_choices,required=False)
-    choice_category = forms.ChoiceField(widget=forms.Select(attrs={'class': 'category-select'}),
-                                        choices=blank_category + category_choices,required=False)
+    choice_letter = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),
+                                      choices=blank_letter + letter_choices, required=False)
+    choice_category = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),
+                                        choices=blank_category + category_choices, required=False)
+    search_field = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control mr-sm-2','placeholder':u'Введите слово'}),required=False)
+

@@ -1,6 +1,8 @@
 {% extends 'base_struct.html' %}
 {% block content %}
-    {% for bank in object_list %}
-            <li>{{ bank.name }}&nbsp;{{ bank.count_partners }}</li>
-    {% endfor %}
+    <div class="row justify-content-center">
+        {% for bank in object_list %}
+             <div class="col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9" >{{ bank.name }}{{ bank.count_partners }}</div>
+        {% endfor %}
+    </div>
 {% endblock %}

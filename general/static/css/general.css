@@ -163,6 +163,7 @@ input[type="search"] {
 .base-wrapper {
 	min-height:100vh;
 	margin-bottom:-100px;
+    padding-bottom: 100px;
 }
 
 .base-top-logo-box {
@@ -190,3 +191,5 @@ input[type="search"] {
 	height:100px;
 }
 
+
+/*new */
