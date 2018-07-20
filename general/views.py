@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django import forms
-from django.db.models import Count
+from django.db.models import Count, Max
 
-from general.forms import SearchForm
+from general.forms import BaseSearchForm,PartnersSearchForm
 from general.models import Banks,Stores
 
 
 
 
 def personal_choice(request):
-    params_form = SearchForm()
+    params_form = BaseSearchForm()
     context = {'form': params_form}
     context['view_name'] = 'personal_choice'
     return render(request, 'personal_choice.html', context)
@@ -24,9 +24,9 @@ class StoresList(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.GET:
-            self.form = SearchForm(request.GET)
+            self.form = PartnersSearchForm(request.GET)
         else:
-            self.form = SearchForm(self.default_data)
+            self.form = PartnersSearchForm(self.default_data)
         self.form.is_valid()
         return super(StoresList, self).dispatch(request, *args, **kwargs)
 
@@ -57,9 +57,7 @@ class BanksList(ListView):
     view_name = 'BanksList'
 
     def dispatch(self, request, *args, **kwargs):
-        self.form = SearchForm(request.GET)
-        self.form.fields['choice_letter'].widget = forms.HiddenInput()
-        self.form.fields['choice_category'].widget = forms.HiddenInput()
+        self.form = BaseSearchForm(request.GET)
         self.form.is_valid()
         return super(BanksList, self).dispatch(request, *args, **kwargs)
 

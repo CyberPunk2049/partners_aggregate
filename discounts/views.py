@@ -1,10 +1,8 @@
 from django.views.generic import TemplateView
-from django import forms
+from django.db.models import F
 
 from discounts.models import Banks_Stores, Payments_Stores
 from discounts.forms import DiscountSearchForm
-
-from general.forms import SearchForm
 
 class DiscountsList(TemplateView):
     '''Класс для отображения найденных скидок'''
@@ -12,9 +10,7 @@ class DiscountsList(TemplateView):
     view_name = 'DiscountsList'
 
     def dispatch(self, request, *args, **kwargs):
-        self.form = SearchForm(request.GET)
-        self.form.fields['choice_letter'].widget = forms.HiddenInput()
-        self.form.fields['choice_category'].widget = forms.HiddenInput()
+        self.form = DiscountSearchForm(request.GET)
         self.form.is_valid()
         return super(DiscountsList, self).dispatch(request, *args, **kwargs)
 
@@ -26,34 +22,41 @@ class DiscountsList(TemplateView):
         context['form'] = self.form
 
         if self.form.cleaned_data['search_field']:
-            context['discount_dict'] = self.get_dict_of_discount_lists(self.form.cleaned_data['search_field'])
-            if True in list(map(bool,context['discount_dict'].values())):
+            context['joint_discount_list'] = self.get_joint_discount_list(self.form.cleaned_data['search_field'])
+            if context['joint_discount_list']:
                 context['discounts_no_found'] = False
             else:
                 context['discounts_no_found'] = True
+
         context['view_name']=self.view_name
         return context
 
-    def get_dict_of_discount_lists(self, filter_name):
+    def get_joint_discount_list(self, filter_name):
+        #объединим списки скидок в один
         type_names = {
             'Banks_Stores':'Банковские скидки',
             'Payments_Stores':'Скидки платёжных систем'
         }
-        discount_dict={}
+        joint_discount_list=None
 
-        for key,value in type_names.items():
-            discount_dict[value]=self.get_discount_list(key,filter_name)
-
-        return discount_dict
+        if self.form.cleaned_data['choose_type']=='All':
+            for key,value in type_names.items():
+                if joint_discount_list==None:
+                    joint_discount_list=self.get_discount_list(key,filter_name)
+                else:
+                    joint_discount_list=joint_discount_list.union(self.get_discount_list(key,filter_name))
+        else:
+           joint_discount_list = self.get_discount_list(self.form.cleaned_data['choose_type'], filter_name)
+        return joint_discount_list
 
     def get_discount_list(self, type_name, filter_name):
-
+        #получим список скидок в зависимости от сервиса
         if type_name == 'Banks_Stores':
             queryset = Banks_Stores.objects.filter(id_store__name__icontains=filter_name)
-            discount_list = queryset.values_list('id_bank__name', 'id_store__name', 'stock_value')
-
+            discount_list = queryset.annotate(service_name=F('id_bank__name')).values('service_name','id_store__name', 'stock_value')
         if type_name == 'Payments_Stores':
             queryset = Payments_Stores.objects.filter(id_store__name__icontains=filter_name)
-            discount_list = queryset.values_list('id_payment__name', 'id_store__name', 'stock_value')
+            discount_list = queryset.annotate(service_name=F('id_payment__name')).values('service_name','id_store__name', 'stock_value')
 
+            print(discount_list)
         return discount_list

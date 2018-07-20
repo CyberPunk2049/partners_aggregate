@@ -1,20 +1,16 @@
 {% extends 'base_struct.html' %}
 {% block content %}
-    {% if discount_dict%}
+    {% if joint_discount_list%}
         {% if discounts_no_found %}
             Совпадений не найдено, попробуйте другое название
         {% else %}
-            {% for key, value in discount_dict.items %}
-                {% if value %}
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{ key }}:
-                    <br>
-                    <br>
-                    {% for name,partner,discount in value %}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ partner }}&nbsp;:&nbsp;{{ name }}&nbsp;:&nbsp;скидка до&nbsp;{{ discount}}%<br>
-                    {% endfor %}
-                    <br>
-                {% endif %}
-            {% endfor %}
+            <div class="row justify-content-center">
+                {% for discount in joint_discount_list %}
+                    <div class="border border-10 bank mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9 bg-light" >
+                        <h4>{{ discount.id_store__name }}</h4><h5>Скидка до:&nbsp{{ discount.stock_value }}&nbsp%&nbspот:&nbsp{{ discount.service_name }}</h5>
+                    </div>
+                {% endfor %}
+            <div>
         {% endif %}
     {% else %}
         Введите название магазина

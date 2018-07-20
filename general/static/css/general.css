@@ -193,3 +193,10 @@ input[type="search"] {
 
 
 /*new */
+.bank {
+    height:75px;
+}
+
+.border-10 {
+    border-radius:.25rem;
+}
