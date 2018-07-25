@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.views.generic.base import RedirectView
 from django.contrib import admin
 
-from general.views import personal_choice, BanksList, StoresList
+from general.views import BanksList, StoresList
 
 from discounts.views import DiscountsList
 

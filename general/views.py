@@ -6,15 +6,6 @@ from django.db.models import Count, Max
 from general.forms import BaseSearchForm,PartnersSearchForm
 from general.models import Banks,Stores
 
-
-
-
-def personal_choice(request):
-    params_form = BaseSearchForm()
-    context = {'form': params_form}
-    context['view_name'] = 'personal_choice'
-    return render(request, 'personal_choice.html', context)
-
 class StoresList(ListView):
     '''Класс для отображения списка партнёров'''
     template_name = 'general/stores_list.html'

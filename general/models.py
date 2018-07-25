@@ -90,8 +90,7 @@ class Banks(models.Model):
         editable=False,
         verbose_name='Логотип'
     )
-    url_bonus = models.URLField(
-        max_length=300,
+    url_bonus = models.URLField(        max_length=300,
         blank=True,
         verbose_name='Ссылка на акции, бонусы и спецпредложения'
     )

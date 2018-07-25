@@ -10,7 +10,7 @@ class DiscountsList(TemplateView):
     view_name = 'DiscountsList'
 
     def dispatch(self, request, *args, **kwargs):
-        self.form = DiscountSearchForm(request.GET)
+        self.form = DiscountSearchForm(request.GET,initial={'choose_type':'All','search_field':''})
         self.form.is_valid()
         return super(DiscountsList, self).dispatch(request, *args, **kwargs)
 
@@ -23,12 +23,9 @@ class DiscountsList(TemplateView):
 
         if self.form.cleaned_data['search_field']:
             context['joint_discount_list'] = self.get_joint_discount_list(self.form.cleaned_data['search_field'])
-            if context['joint_discount_list']:
-                context['discounts_no_found'] = False
-            else:
-                context['discounts_no_found'] = True
 
         context['view_name']=self.view_name
+        print(context['form'].changed_data)
         return context
 
     def get_joint_discount_list(self, filter_name):
@@ -53,10 +50,9 @@ class DiscountsList(TemplateView):
         #получим список скидок в зависимости от сервиса
         if type_name == 'Banks_Stores':
             queryset = Banks_Stores.objects.filter(id_store__name__icontains=filter_name)
-            discount_list = queryset.annotate(service_name=F('id_bank__name')).values('service_name','id_store__name', 'stock_value')
+            discount_list = queryset.annotate(service_name=F('id_bank__name'),url_stock=F('id_bank__url_stock')).values('service_name','id_store__name', 'stock_value','url_stock')
         if type_name == 'Payments_Stores':
             queryset = Payments_Stores.objects.filter(id_store__name__icontains=filter_name)
-            discount_list = queryset.annotate(service_name=F('id_payment__name')).values('service_name','id_store__name', 'stock_value')
+            discount_list = queryset.annotate(service_name=F('id_payment__name'),url_stock=F('id_payment__url_stock')).values('service_name','id_store__name', 'stock_value','url_stock')
 
-            print(discount_list)
         return discount_list

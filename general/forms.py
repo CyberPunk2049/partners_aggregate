@@ -3,7 +3,8 @@ from general.models import Stores_Categories
 
 
 class BaseSearchForm(forms.Form):
-    search_field = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control mr-sm-2','placeholder':u'Введите слово'}),required=False)
+    search_field = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control mr-sm-2','placeholder':u'Введите слово','size':'15'})
+                                   ,required=False)
 
 class PartnersSearchForm(BaseSearchForm):
     category_choices = tuple(Stores_Categories.objects.values_list('id', 'name'))

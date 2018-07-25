@@ -1,18 +1,20 @@
 {% extends 'base_struct.html' %}
 {% block content %}
-    {% if joint_discount_list%}
-        {% if discounts_no_found %}
-            Совпадений не найдено, попробуйте другое название
-        {% else %}
+    {% if 'search_field' in form.changed_data %}
             <div class="row justify-content-center">
                 {% for discount in joint_discount_list %}
-                    <div class="border border-10 bank mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9 bg-light" >
-                        <h4>{{ discount.id_store__name }}</h4><h5>Скидка до:&nbsp{{ discount.stock_value }}&nbsp%&nbspот:&nbsp{{ discount.service_name }}</h5>
+                    <div class="border border-10 discount mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9 bg-light" >
+                        <a href="{{ discount.url_stock }}"><h4>{{ discount.id_store__name }}</h4><h5>Скидка до:&nbsp{{ discount.stock_value }}&nbsp%&nbspот:&nbsp{{ discount.service_name }}</h5></a>
+                    </div>
+                {% empty %}
+                    <div style="padding-top: 30%">
+                    <H3>Партнёр не найден</H3>
                     </div>
                 {% endfor %}
-            <div>
-        {% endif %}
+            </div>
     {% else %}
-        Введите название магазина
+        <div class="row justify-content-center" style="padding-top: 30%">
+            <H3>Введите в поиск партнёра</H3>
+        </div>
     {% endif %}
 {% endblock %}

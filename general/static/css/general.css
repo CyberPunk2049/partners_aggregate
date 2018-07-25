@@ -197,12 +197,27 @@ input[type="search"] {
     height:75px;
 }
 
+.discount {
+    height: 85px;
+}
+
+.bank:hover {
+}
+
 .border-10 {
     border-radius:.25rem;
 }
 
+select {
+    max-width: 150px;
+}
+a {
+    color: #343a40;
+}
+
 a:hover {
     text-decoration: none;
+    color: #000000;
 }
 
 html {
@@ -212,6 +227,7 @@ html {
 body {
   margin-bottom: 80px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
