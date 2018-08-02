@@ -27,5 +27,5 @@ urlpatterns = [
 	url(r'^banks/', BanksList.as_view(), name='banks'),
 	url(r'^stores/', StoresList.as_view(), name='stores'),
 	url(r'^discounts/', DiscountsList.as_view(), name='discounts'),
-	url(r'^$', RedirectView.as_view(pattern_name='banks', permanent=False)),
+	url(r'^$', RedirectView.as_view(pattern_name='discounts', permanent=False)),
 ]

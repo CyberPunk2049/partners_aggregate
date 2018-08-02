@@ -17,13 +17,22 @@ class Banks_Stores(models.Model):
         decimal_places=2,
         verbose_name='Скидка до,%'
     )
+    url_discount = models.URLField(
+        max_length=300,
+        blank=True,
+        verbose_name='Ссылка на скидку'
+    )
+    date_end = models.DateField(
+        default='2099-12-31',
+        verbose_name='Срок скидки'
+    )
 
     def __str__(self):
         return self.id_bank.name + ' : ' + self.id_store.name
 
     class Meta:
-        verbose_name = u'Скидку партнёра'
-        verbose_name_plural = u'Скидки партнёров'
+        verbose_name = u'Скидку банка'
+        verbose_name_plural = u'Скидки банков'
         db_table='discounts_banks_stores'
         unique_together = (('id_bank', 'id_store'),)
 
@@ -43,6 +52,15 @@ class Payments_Stores(models.Model):
         max_digits=6,
         decimal_places=2,
         verbose_name='Скидка до,%'
+    )
+    url_discount = models.URLField(
+        max_length=300,
+        blank=True,
+        verbose_name='Ссылка на скидку'
+    )
+    date_end = models.DateField(
+        default='2099-12-31',
+        verbose_name='Срок скидки'
     )
 
     def __str__(self):
