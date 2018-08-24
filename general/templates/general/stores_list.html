@@ -4,7 +4,12 @@
         {% for partner in object_list %}
             <div class="mt-2 col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="card bg-light">
-                    <a href="{{ URL }}/discounts/?choose_type=All&search_field={{ partner.name }}"><div class="card-header"><H5>{{ partner.name }}</H5></div></a>
+                    <a href="{{ URL }}/discounts/?choose_type=All&search_field={{ partner.name }}">
+                        <div class="card-body">
+                            <H5>{{ partner.name }}</H5>
+                            Максимальная скидка:&nbsp{{ partner.max_discount }}&nbsp%
+                        </div>
+                    </a>
                     <a href="{{ partner.url }}" class="btn btn-info">Сайт партнёра</a>
                 </div>
             </div>
