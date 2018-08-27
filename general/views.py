@@ -42,6 +42,7 @@ class StoresList(ListView):
         disc_partners_list=Banks_Stores.objects.all().union(Payments_Stores.objects.all())
         disc_partners_list=disc_partners_list.distinct('id_store').values_list('id_store',flat=True)
         self.queryset=self.queryset.filter(id__in=disc_partners_list)
+        print(self.queryset.query)
 
         # Вычислим максимальную скидку банка и платёжной системы
         self.queryset=self.queryset.annotate(max_discount_bank=Max('banks_stores__stock_value'))

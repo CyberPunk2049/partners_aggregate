@@ -3,8 +3,34 @@
     {% if 'search_field' in form.changed_data %}
             <div class="row justify-content-center">
                 {% for discount in joint_discount_list %}
-                    <div class="border border-10 discount mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9 bg-light" >
-                        <a href="{{ discount.url_stock }}"><h4>{{ discount.id_store__name }}</h4><h5>Скидка до:&nbsp{{ discount.stock_value }}&nbsp%&nbspот:&nbsp{{ discount.service_name }}</h5></a>
+                    <!--<div class="border border-10 discount mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9 bg-light" >
+                        -->
+                    <div class="mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ discount.id_store__name }}</h4>
+                                <H5 class="card-text">
+                                    {% if discount.stock_value == 0 %}
+                                        Спец.предложение
+                                    {% else %}
+                                        Скидка до:&nbsp{{ discount.stock_value }}&nbsp%&nbsp
+                                    {% endif %}
+
+                                        от:&nbsp{{ discount.service_name }}
+
+                                    {% if discount.date_end|date:"d.m.Y" != '31.12.2099'%}
+                                        &nbsp&nbspИстекает:&nbsp {{ discount.date_end|date:"d.m.Y" }}&nbspг.
+                                    {% endif %}
+                                </H5>
+                                <a href="
+                                {% if discount.url_discount == None  %}
+                                    {{ discount.url_stock }}
+                                {% else %}
+                                    {{ discount.url_discount }}
+                                {% endif %}
+                                    " class="btn btn-info pull-right">Перейти на сайт</a>
+                            </div>
+                        </div>
                     </div>
                 {% empty %}
                     <div style="padding-top: 30%">

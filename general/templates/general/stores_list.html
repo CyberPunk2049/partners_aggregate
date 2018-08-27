@@ -7,10 +7,15 @@
                     <a href="{{ URL }}/discounts/?choose_type=All&search_field={{ partner.name }}">
                         <div class="card-body">
                             <H5>{{ partner.name }}</H5>
-                            Максимальная скидка:&nbsp{{ partner.max_discount }}&nbsp%
+                            {% if partner.max_discount == 0  %}
+                                Спец. предложение
+                            {% else %}
+                                Максимальная скидка:&nbsp{{ partner.max_discount }}&nbsp%
+                            {% endif %}
+
                         </div>
                     </a>
-                    <a href="{{ partner.url }}" class="btn btn-info">Сайт партнёра</a>
+                    <a href="{{ partner.url }}" class="btn btn-info pull-right">Сайт партнёра</a>
                 </div>
             </div>
         {% endfor %}
