@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
 class Stores_Categories(models.Model):
     name = models.CharField(
@@ -30,15 +31,8 @@ class Stores(models.Model):
         verbose_name='Сайт',
         validators=[
             URLValidator,
-                    ],
+        ],
     )
-    url_logo = models.URLField(
-        max_length=300,
-        blank=True,
-        editable=False,
-        verbose_name='Логотип'
-    )
-
     categories = models.ForeignKey(
         Stores_Categories,
         blank=True,
@@ -46,28 +40,42 @@ class Stores(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Категория'
     )
+    url_logo = models.ImageField(
+        max_length=300,
+        upload_to='stores/',
+        blank=True,
+        editable=False,
+        verbose_name='Логотип'
+    )
 
     def __str__(self):
         return self.name
+
+    def logo_img(self):
+        if self.url_logo:
+            return mark_safe('<image height="70" src="%s" />' % self.url_logo.url)
+        else:
+            return 'Нет логотипа'
 
     def clean(self):
 
         # При сохранении нового партнёра проверяет, есть ли партнёры с таким URL в базе данных.
         # Вызывает исключение со списком имён партнёров, у которых совпадает URL.
-        if self.id==None:
-            if self.url !='':
-                url=self.url.split('/')[2]
-                db_stores_all=Stores.objects.values_list('name','url')
-                db_stores_url=[(k,i.split('/')[2]) for (k,i) in db_stores_all if i!='']
-                urls_names=[i for (k,i) in db_stores_url]
+        if self.id == None:
+            if self.url != '':
+                url = self.url.split('/')[2]
+                db_stores_all = Stores.objects.values_list('name', 'url')
+                db_stores_url = [(k, i.split('/')[2]) for (k, i) in db_stores_all if i != '']
+                urls_names = [i for (k, i) in db_stores_url]
                 if url in urls_names:
-                    overlap_names=[k for (k,i) in db_stores_url if i==url]
-                    raise ValidationError('Партнёры: '+','.join(overlap_names)+' - имеют схожий URL')
+                    overlap_names = [k for (k, i) in db_stores_url if i == url]
+                    raise ValidationError('Партнёры: ' + ','.join(overlap_names) + ' - имеют схожий URL')
         else:
             urls_names = [i.split('/')[2] for
                           i in Stores.objects.exclude(id=self.id).values_list('url', flat=True) if i != '']
-            if self.url!='' and self.url.split('/')[2] in urls_names :
+            if self.url != '' and self.url.split('/')[2] in urls_names:
                 raise ValidationError('The URL already exists in database')
+
     class Meta:
         verbose_name = u'Партнёр'
         verbose_name_plural = u'Партнёры'
@@ -84,13 +92,9 @@ class Banks(models.Model):
         blank=True,
         verbose_name='Сайт'
     )
-    url_logo = models.URLField(
+
+    url_bonus = models.URLField(
         max_length=300,
-        blank=True,
-        editable=False,
-        verbose_name='Логотип'
-    )
-    url_bonus = models.URLField(        max_length=300,
         blank=True,
         verbose_name='Ссылка на акции, бонусы и спецпредложения'
     )
@@ -98,6 +102,12 @@ class Banks(models.Model):
         max_length=300,
         blank=True,
         verbose_name='Ссылка на партнёрские программы'
+    )
+    url_logo = models.ImageField(
+        max_length=300,
+        upload_to='banks/',
+        blank=True,
+        verbose_name='Логотип'
     )
     partners = models.ManyToManyField(
         Stores,
@@ -108,6 +118,12 @@ class Banks(models.Model):
     def __str__(self):
         return self.name
 
+    def logo_img(self):
+        if self.url_logo:
+            return mark_safe('<image height="70" src="%s" />' % self.url_logo.url)
+        else:
+            return 'Нет логотипа'
+
     def url_href(self):
         return '<a href="' + self.url + '">Ссылка</a>'
 
@@ -115,6 +131,7 @@ class Banks(models.Model):
         verbose_name = u'Банк'
         verbose_name_plural = u'Банки'
         ordering = ['name']
+
 
 class Payments(models.Model):
     name = models.CharField(
@@ -126,12 +143,6 @@ class Payments(models.Model):
         blank=True,
         verbose_name='Сайт'
     )
-    url_logo = models.URLField(
-        max_length=300,
-        blank=True,
-        editable=False,
-        verbose_name='Логотип'
-    )
     url_bonus = models.URLField(
         max_length=300,
         blank=True,
@@ -142,6 +153,13 @@ class Payments(models.Model):
         blank=True,
         verbose_name='Ссылка на партнёрские программы'
     )
+    url_logo = models.ImageField(
+        max_length=300,
+        upload_to='payments/',
+        blank=True,
+        verbose_name='Логотип'
+    )
+
     partners = models.ManyToManyField(
         Stores,
         through='discounts.Payments_Stores',
@@ -150,6 +168,12 @@ class Payments(models.Model):
 
     def __str__(self):
         return self.name
+
+    def logo_img(self):
+        if self.url_logo:
+            return mark_safe('<image height="70" src="%s" />' % self.url_logo.url)
+        else:
+            return 'Нет логотипа'
 
     def url_href(self):
         return '<a href="' + self.url + '">Ссылка</a>'

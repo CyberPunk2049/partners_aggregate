@@ -198,9 +198,6 @@ input[type="search"] {
     height: 85px;
 }
 
-.bank:hover {
-}
-
 .border-10 {
     border-radius:.25rem;
 }
@@ -214,7 +211,7 @@ a {
 
 a:hover {
     text-decoration: none;
-    color: #000000;
+    color: #17a2b8;
 }
 
 html {

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 """partners_aggregate URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,11 +23,13 @@ from general.views import BanksList, StoresList
 
 from discounts.views import DiscountsList
 
-
 urlpatterns = [
-	url(r'^admin/', admin.site.urls),
-	url(r'^banks/', BanksList.as_view(), name='banks'),
-	url(r'^stores/', StoresList.as_view(), name='stores'),
-	url(r'^discounts/', DiscountsList.as_view(), name='discounts'),
-	url(r'^$', RedirectView.as_view(pattern_name='discounts', permanent=False)),
-]
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^banks/', BanksList.as_view(), name='banks'),
+                  url(r'^stores/', StoresList.as_view(), name='stores'),
+                  url(r'^discounts/', DiscountsList.as_view(), name='discounts'),
+                  url(r'^$', RedirectView.as_view(pattern_name='banks', permanent=False)),
+              ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

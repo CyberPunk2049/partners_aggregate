@@ -1,5 +1,5 @@
 from django.db import models
-from general.models import Banks,Stores,Payments
+from general.models import Banks, Stores, Payments
 
 class Banks_Stores(models.Model):
     id_bank = models.ForeignKey(
@@ -33,7 +33,7 @@ class Banks_Stores(models.Model):
     class Meta:
         verbose_name = u'Скидку банка'
         verbose_name_plural = u'Скидки банков'
-        db_table='discounts_banks_stores'
+        db_table = 'discounts_banks_stores'
         unique_together = (('id_bank', 'id_store'),)
 
 

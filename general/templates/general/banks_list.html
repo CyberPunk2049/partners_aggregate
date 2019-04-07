@@ -1,21 +1,26 @@
 {% extends 'base_struct.html' %}
 {% block content %}
-
-    <div class="row justify-content-center">
-        {% for bank in object_list %}
-            <div class="mt-1 col-xs-12 col-sm-12 col-md-11 col-lg-10 col-xl-9" >
-                <div class="card bg-light">
-                    <a href="{{ URL }}/discounts/?choose_type=Banks_Stores&banks_choice={{ bank.id }}">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ bank.name }}</h4>
-                            <H5 class="card-text">Число партнёров:&nbsp;{{ bank.count_partners }}&nbsp;Скидки до:&nbsp;{{ bank.max_discount }}&nbsp;%</H5>
-
-                            <a href="{{ bank.url_stock }}" class="btn btn-info pull-right">Перейти на сайт</a>
+    {% for bank in object_list %}
+        {% cycle '<div class="row">' '' %}
+                <div onclick="window.location.href='{{ URL }}/discounts/?choose_type=Banks_Stores&banks_choice={{ bank.id }}'" style="cursor: pointer" class="mt-4 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="mb-1">{{ bank.name }}</h3>
+                            <h6>Число партнёров:&nbsp;{{ bank.count_partners }}</h6>
+                            <h6>Скидки до:&nbsp;{{ bank.max_discount }} %</h6>
+                            <a href="{{ bank.url_stock }}" class="mt-4">Сайт банка</a>
                         </div>
-                    </a>
+                        <div class="col-auto">
+                            <img class="bd-placeholder-img"
+                                 {% if bank.url_logo %}
+                                    src="{{ MEDIA_URL }}{{ bank.url_logo }}"
+                                 {% else %}
+                                    src="{{ STATIC_URL }}bank.png"
+                                 {% endif %}
+                                 width="200" height="180">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-
+        {% cycle '' '</div>' %}
+    {% endfor %}
 {% endblock %}
