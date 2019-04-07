@@ -8,10 +8,10 @@
                             <h3 class="mb-1">{{ bank.name }}</h3>
                             <h6>Магазины-партнёры:&nbsp;{{ bank.count_partners }}</h6>
                             <h6>Скидки до:&nbsp;{{ bank.max_discount }} %</h6>
-                            <a href="{{ bank.url_stock }}" class="mt-4">Посмотреть на сайте банка</a>
+                            <a href="{{ bank.url_stock }}" onclick="event.stopPropagation()" target="_blank" class="mt-4">Посмотреть на сайте банка</a>
                         </div>
                         <div class="col-auto">
-                            <img class="bd-placeholder-img"
+                            <img class="bd-placeholder-img m-1"
                                  {% if bank.url_logo %}
                                     src="{{ MEDIA_URL }}{{ bank.url_logo }}"
                                  {% else %}
