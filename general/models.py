@@ -44,7 +44,6 @@ class Stores(models.Model):
         max_length=300,
         upload_to='stores/',
         blank=True,
-        editable=False,
         verbose_name='Логотип'
     )
 

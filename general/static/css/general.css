@@ -234,3 +234,36 @@ body {
     height: 60px;
     padding-left: 30px;
 }
+
+@media (min-width: 0px) {
+    #store-text {
+        height: 100%;
+        width: 50%;
+        float: left;
+    }
+    #store-image {
+        height: 100%;
+        width: 50%;
+        float: left;
+    }
+    #store-card {
+        height: 170px;
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+@media (min-width: 576px) {
+    #store-text {
+        height: 50%;
+        width: 100%;
+    }
+    #store-image {
+        height: 50%;
+        width: 100%;
+    }
+    #store-card {
+        height: 300px;
+        margin-bottom: .25rem;!important;
+    }
+}

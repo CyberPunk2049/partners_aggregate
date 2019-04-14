@@ -2,13 +2,13 @@
 {% block content %}
     {% for bank in object_list %}
         {% cycle '<div class="row">' '' %}
-                <div onclick="window.location.href='{{ URL }}/discounts/?choose_type=Banks_Stores&banks_choice={{ bank.id }}'" style="cursor: pointer" class="mt-4 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div onclick="window.location.href='{{ URL }}/discounts/?choose_type=Banks_Stores&banks_choice={{ bank.id }}'" style="cursor: pointer" class="mt-4 col-sm-12 col-lg-6">
                     <div class="row no-gutters border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h3 class="mb-1">{{ bank.name }}</h3>
-                            <h6>Магазины-партнёры:&nbsp;{{ bank.count_partners }}</h6>
+                            <h6>Магазинов-партнёров:&nbsp;{{ bank.count_partners }}</h6>
                             <h6>Скидки до:&nbsp;{{ bank.max_discount }} %</h6>
-                            <a href="{{ bank.url_stock }}" onclick="event.stopPropagation()" target="_blank" class="mt-4">Посмотреть на сайте банка</a>
+                            <a href="{{ bank.url_stock }}" onclick="event.stopPropagation()" target="_blank" class="mt-4" style="font-size: 90%">Посмотреть на сайте банка</a>
                         </div>
                         <div class="col-auto">
                             <img class="bd-placeholder-img m-1"

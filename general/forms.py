@@ -14,7 +14,12 @@ class PartnersSearchForm(BaseSearchForm):
     blank_category = (('', '---Категория---'),)
     blank_letter = (('', '---Буква---'),)
 
-    choice_letter = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),
-                                      choices=blank_letter + letter_choices, required=False)
-    choice_category = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),
-                                        choices=blank_category + category_choices, required=False)
+    choice_letter = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control', 'onchange': 'this.form.submit()'}),
+        choices=blank_letter + letter_choices,
+        required=False
+    )
+    choice_category = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control', 'onchange': 'this.form.submit()'}),
+        choices=blank_category + category_choices, required=False
+    )

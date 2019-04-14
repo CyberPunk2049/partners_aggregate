@@ -2,20 +2,40 @@
 {% block content %}
     <div class="row justify-content-center">
         {% for partner in object_list %}
-            <div class="mt-2 col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                <div class="card bg-light">
-                    <a href="{{ URL }}/discounts/?choose_type=All&search_field={{ partner.name }}">
-                        <div class="card-body">
-                            <H5>{{ partner.name }}</H5>
-                            {% if partner.max_discount == 0  %}
+            <div onclick="window.location.href='{{ URL }}/discounts/?choose_type=All&search_field={{ partner.name }}'" style="cursor: pointer" class="col-sm-4 col-lg-2 p-2">
+                <div id="store-card" class="card no-gutters border rounded shadow-sm ">
+                    <div id="store-image" class="p-4 text-center">
+                        <img style="max-height: 100%; max-width: 100%"
+                             {% if partner.url_logo %}
+                                src="{{ MEDIA_URL }}{{ partner.url_logo }}"
+                             {% else %}
+                                src="{{ STATIC_URL }}bank.png"
+                             {% endif %}
+                        >
+                    </div>
+                    <div id="store-text">
+                        <div class="text-center h-50 pt-1">
+                            <h5>
+                                {{ partner.name }}
+                            </h5>
+                        </div>
+                        <div class="h-25 p-2 text-center text-nowrap" style="background-color: greenyellow" >
+                            <b>
+                            {% if partner.max_discount == 0 %}
                                 Спец. предложение
                             {% else %}
-                                Максимальная скидка:&nbsp{{ partner.max_discount }}&nbsp%
+                                Скидки до:&nbsp{{ partner.max_discount }}&nbsp%
                             {% endif %}
-
+                            </b>
                         </div>
-                    </a>
-                    <a href="{{ partner.url }}" class="btn btn-info pull-right">Сайт партнёра</a>
+                        <div class="h-25 p-2">
+                            <a href="{{ partner.url }}" onclick="event.stopPropagation()" style="font-size: 90%" target="_blank" class="card-link">
+
+                                    Сайт магазина
+
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endfor %}
